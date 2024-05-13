@@ -16,6 +16,9 @@ namespace CollegeAPI.Models
         public string Url { get; set; }
 
         [Required]
+        public string Country { get; set; }
+
+        [Required]
         public DateTime CreatedDate { get; set; }
 
         [Required]
