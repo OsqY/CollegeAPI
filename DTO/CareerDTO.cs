@@ -7,6 +7,7 @@ namespace CollegeAPI.DTO
         [Required]
         public int Id { get; set; }
 
+        [RegularExpression(@"^[A-Za-z\s]+$")]
         public string? Name { get; set; }
     }
 }

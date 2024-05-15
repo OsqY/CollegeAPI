@@ -1,3 +1,4 @@
+using CollegeAPI.Attributes;
 using CollegeAPI.DTO;
 using CollegeAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,34 @@ namespace CollegeAPI.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetColleges")]
+        [HttpGet]
         [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 60)]
-        public async Task<RestDTO<College[]>> Get([FromQuery] RequestDTO<CollegeDTO> input)
+        [ManualValidationFilter]
+        public async Task<ActionResult<RestDTO<College[]>>> Get([FromQuery] RequestDTO<CollegeDTO> input)
         {
+            if (!ModelState.IsValid)
+            {
+                var details = new ValidationProblemDetails(ModelState);
+                details.Extensions["traceId"] = System.Diagnostics.Activity.Current?.Id
+                  ?? HttpContext.TraceIdentifier;
+
+                if (ModelState.Keys.Any(k => k == "PageSize"))
+                {
+                    details.Type = "https://tools.ietf.org/html/rfc7231#section-6.6.2";
+                    details.Status = StatusCodes.Status501NotImplemented;
+                    return new ObjectResult(details)
+                    {
+                        StatusCode = StatusCodes.Status501NotImplemented
+                    };
+                }
+                else
+                {
+                    details.Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+                    details.Status = StatusCodes.Status400BadRequest;
+                    return new ObjectResult(details); ;
+                }
+            }
+
             var query = _context.Colleges.AsQueryable();
 
             if (!string.IsNullOrEmpty(input.FilterQuery))
