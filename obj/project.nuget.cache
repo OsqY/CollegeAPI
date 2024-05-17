@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "iGtiygcPtNMRKeP0VjmdI2lqjpZqQ/4CGfS6auwcZ6b8W67ac7Dgim/USizCMT5M8Jo8cUX6H3X6reKO6mriOg==",
+  "dgSpecHash": "KBnXZ2S2faPkUY8+VXERwoK/om+WDqO5DYz1v+qmZI4cZ15B/DlwEh+tNL+33Wv3vLMRq9/vlf8J8wQ0KKYmQw==",
   "success": true,
   "projectFilePath": "/home/oscar/Desktop/C#/CollegeAPI/CollegeAPI.csproj",
   "expectedPackageFiles": [
+    "/home/oscar/.nuget/packages/csvhelper/32.0.3/csvhelper.32.0.3.nupkg.sha512",
     "/home/oscar/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/oscar/.nuget/packages/microsoft.aspnetcore.openapi/8.0.4/microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",
     "/home/oscar/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

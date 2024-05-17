@@ -12,12 +12,16 @@ namespace CollegeAPI.Models
         [Required]
         public string Name { get; set; }
 
+        public string? Url { get; set; }
+
         [Required]
         public DateTime CreatedDate { get; set; }
 
         [Required]
         public DateTime LastModifiedDate { get; set; }
 
-        public ICollection<College_Careers> College_Careers { get; set; }
+        public int CollegeId { get; set; }
+
+        public College? College { get; set; }
     }
 }

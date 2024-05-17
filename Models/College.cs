@@ -13,6 +13,7 @@ namespace CollegeAPI.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Url { get; set; }
 
         [Required]
@@ -24,6 +25,6 @@ namespace CollegeAPI.Models
         [Required]
         public DateTime LastModifiedDate { get; set; }
 
-        public ICollection<College_Careers> College_Careers { get; set; }
+        public ICollection<Career> Careers { get; set; }
     }
 }

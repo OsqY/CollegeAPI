@@ -103,3 +103,6 @@
 /home/oscar/Desktop/C#/CollegeAPI/obj/Debug/net8.0/CollegeAPI.pdb
 /home/oscar/Desktop/C#/CollegeAPI/obj/Debug/net8.0/CollegeAPI.genruntimeconfig.cache
 /home/oscar/Desktop/C#/CollegeAPI/obj/Debug/net8.0/ref/CollegeAPI.dll
+/home/oscar/Desktop/C#/CollegeAPI/bin/Debug/net8.0/CsvHelper.dll
+/home/oscar/Desktop/C#/CollegeAPI/bin/Debug/net8.0/System.Linq.Dynamic.Core.dll
+/home/oscar/Desktop/C#/CollegeAPI/obj/Debug/net8.0/CollegeAPI.sourcelink.json

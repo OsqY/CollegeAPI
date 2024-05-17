@@ -4,6 +4,7 @@ using CollegeAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollegeAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240516211327_AddedFieldsTo")]
+    partial class AddedFieldsTo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace CollegeAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CollegeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -47,8 +47,6 @@ namespace CollegeAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CollegeId");
 
                     b.ToTable("Careers");
                 });
@@ -84,20 +82,51 @@ namespace CollegeAPI.Migrations
                     b.ToTable("Colleges");
                 });
 
-            modelBuilder.Entity("CollegeAPI.Models.Career", b =>
+            modelBuilder.Entity("CollegeAPI.Models.College_Careers", b =>
                 {
-                    b.HasOne("CollegeAPI.Models.College", "College")
-                        .WithMany("Careers")
-                        .HasForeignKey("CollegeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.Property<int>("CareerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CollegeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("CareerId", "CollegeId");
+
+                    b.HasIndex("CollegeId");
+
+                    b.ToTable("College_Careers");
+                });
+
+            modelBuilder.Entity("CollegeAPI.Models.College_Careers", b =>
+                {
+                    b.HasOne("CollegeAPI.Models.Career", "Career")
+                        .WithMany("College_Careers")
+                        .HasForeignKey("CareerId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("CollegeAPI.Models.College", "College")
+                        .WithMany("College_Careers")
+                        .HasForeignKey("CollegeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Career");
 
                     b.Navigation("College");
                 });
 
+            modelBuilder.Entity("CollegeAPI.Models.Career", b =>
+                {
+                    b.Navigation("College_Careers");
+                });
+
             modelBuilder.Entity("CollegeAPI.Models.College", b =>
                 {
-                    b.Navigation("Careers");
+                    b.Navigation("College_Careers");
                 });
 #pragma warning restore 612, 618
         }
